@@ -153,9 +153,10 @@ namespace Shogun_WebApplicatie.database
             List<Winkelwagen> winkelwagens = new List<Winkelwagen>();
             using (OracleConnection connection = Connection)
             {
-                string query = "SELECT BP.BestellingID, a.ID, P.ID, BP.AANTAL FROM BESTELLINGPRODUCT BP, ACCOUNT A, PRODUCT P, BESTELLING B " +
-                               "WHERE P.ID = BP.PRODUCTID AND B.ID = BP.BESTELLINGID AND A.ID = B.ACCOUNTID " +
-                               "AND a.emailadres ="+ "'"+ useremail +"'";
+                string query = "SELECT bp.BestellingID, a.ID, P.ID as PRODUCTID, BP.AANTAL " +
+                               "FROM ACCOUNT A, PRODUCT P, bestellingproduct bp " +
+                               "WHERE P.ID = BP.PRODUCTID AND a.id = bp.accontid" +
+                               " AND a.emailadres =" + "'"+ useremail +"'";
                 using (OracleCommand command = new OracleCommand(query, connection))
                 {
                     using (OracleDataReader reader = command.ExecuteReader())
@@ -176,7 +177,7 @@ namespace Shogun_WebApplicatie.database
 
             int bestellingid = Convert.ToInt32(reader["BESTELLINGID"]);
             int accountid = Convert.ToInt32(reader["ID"]);
-            string productid = Convert.ToString(reader["ID_1"]);
+            string productid = Convert.ToString(reader["PRODUCTID"]);
             int aantal = Convert.ToInt32(reader["AANTAL"]);
 
             Klant klantMetCart = null;
@@ -196,7 +197,7 @@ namespace Shogun_WebApplicatie.database
             }
 
             return new
-                Winkelwagen(bestellingid, klantMetCart, producteninCart);
+                Winkelwagen(accountid, klantMetCart, producteninCart);
         }
 
         

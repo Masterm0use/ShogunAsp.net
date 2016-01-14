@@ -4,50 +4,66 @@
     
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Body" runat="server">
-    <form class="form-signin" runat="server">
-    
-        <h4>Register a new user</h4>
-    <hr/>
-    <p>
-        <asp:Literal runat="server" ID="litStatusMessage"/>
-    </p>
-
-    User name:
-    <br/>
-    <asp:TextBox runat="server" ID="txtUserName" CssClass="inputs"/>
-    <br/>
-
-    Password:
-    <br/>
-    <asp:TextBox runat="server" ID="txtPassword" TextMode="Password" CssClass="inputs"/>
-    <br/>
-
-    Confirm password:
-    <br/>
-    <asp:TextBox runat="server" ID="txtConfirmPassword" TextMode="Password" CssClass="inputs"/>
-    <br/>
-
-    First Name:
-    <br/>
-    <asp:TextBox runat="server" ID="txtFirstName" CssClass="inputs"/>
-    <br/>
-
-    Last Name:
-    <br/>
-    <asp:TextBox runat="server" ID="txtLastName" CssClass="inputs"/>
-    <br/>
-
-    Address:
-    <br/>
-    <asp:TextBox runat="server" ID="txtAddress" CssClass="inputs"/>
-    <br/>
-
-    Postal Code:
-    <br/>
-    <asp:TextBox runat="server" ID="txtPostalCode" CssClass="inputs"/>
-    <br/>
-    <p>
-        <asp:Button ID="btnRegister" runat="server" Text="Register" OnClick="btnRegister_Click" CssClass="button" Width="150px"/>
-    </p>
-    </form>
+   runat="server">
+    <h2>Product Toevoegen</h2>
+    <div class="row">
+        <div class="col-md-5">
+            <form class="form-horizontal" role="form" runat="server">
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="email">Naam:</label>
+                    <div class="col-sm-8">
+                        <asp:TextBox type="text" CssClass="form-control" ID="tbxNaam" runat="server"></asp:TextBox>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="pwd">Categorie:</label>
+                    <div class="col-sm-8">
+                        <asp:DropDownList CssClass="form-control" ID="ddlCategorien" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlCategorien_OnSelectedIndexChanged"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="pwd">Subcategorie:</label>
+                    <div class="col-sm-8">
+                        <asp:DropDownList CssClass="form-control" ID="ddlSubCategorien" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlSubCategorien_OnSelectedIndexChanged"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="pwd">2e Subcategorie:</label>
+                    <div class="col-sm-8">
+                        <asp:DropDownList CssClass="form-control" ID="ddlSecondSubCategorien" runat="server" AutoPostBack="True"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Prijs:</label>
+                    <div class="col-sm-8">
+                        <asp:TextBox type="number" CssClass="form-control" ID="tbxPrijs" runat="server"></asp:TextBox>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Beschrijving:</label>
+                    <div class="col-sm-8">
+                        <asp:TextBox style="height: 200px; resize: none;}" TextMode="MultiLine" type="text" CssClass="form-control" ID="tbxBeschrijving" runat="server"></asp:TextBox>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Bezorgtijd</label>
+                    <div class="col-sm-8">
+                        <asp:DropDownList CssClass="form-control" ID="ddlBezorgtijd" runat="server"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Afbeelding:</label>
+                    <div class="col-sm-8">
+                        <asp:TextBox type="text" CssClass="form-control" ID="tbxAfbeeldingpath" runat="server"></asp:TextBox>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-4 col-sm-10">
+                        <asp:Button type="submit" CssClass="btn btn-default" runat="server" Text="Bevestigen" OnClick="OnClick" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</asp:Content>
 </asp:Content>

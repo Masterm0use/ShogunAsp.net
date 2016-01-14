@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Shogun_WebApplicatie {
+namespace Shogun_WebApplicatie.Pages.UserControls {
     
     
-    public partial class WebForm1 {
+    public partial class ProductCategorie {
         
         /// <summary>
         /// categorieLink control.
@@ -20,14 +20,5 @@ namespace Shogun_WebApplicatie {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.PlaceHolder categorieLink;
-        
-        /// <summary>
-        /// pnlProducts control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlProducts;
     }
 }

@@ -7,7 +7,7 @@
 
 /*Generic Controls*/
 .button {
-    background: linear-gradient(to bottom, darkgreen, green);
+    background: linear-gradient(to bottom, Yellow, Black);
     padding: 10px;
     margin: 10px;
     color: white;
@@ -94,4 +94,31 @@ hr {
     border-style: inset;
     border-width: 1px;
 } 
+
+.CartTable
+{
+    text-align: center;
+    border: 15px solid #f5f4f2;
+    margin-bottom: 10px;
+    width: 100%;
+    padding: 10px;
+}
+
+.CartTable input
+{
+    width: 65px;
+    height: 65px;
+}
+
+.CartTable h4
+{
+    padding: 0;
+    margin: 0;
+}
+
+.CartTable tr td select
+{
+    width: 100px;
+}
+
 

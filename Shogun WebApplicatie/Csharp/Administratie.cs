@@ -11,12 +11,13 @@ namespace Shogun_WebApplicatie.Csharp
     {
         private Database data;
         private List<Account> accounts;
+        private List<Klant> klanten;
         private List<Product> products;
         private List<Categorie> categories;
 
-        public List<Account> Accounts
+        public List<Klant> Klanten
         {
-            get { return accounts; }
+            get { return klanten; }
         }
 
         public List<Product> Products
@@ -39,6 +40,7 @@ namespace Shogun_WebApplicatie.Csharp
         {
             products = data.GetAllProducten();
             categories = data.GetAllCategories();
+            klanten = data.GetAllKlantenWithoutWinkelWagen();
         }
 
         public bool CheckLogin(string username, string password)
@@ -111,6 +113,60 @@ namespace Shogun_WebApplicatie.Csharp
                 }
             }
             return 0;
+        }
+
+        public Klant FindKlant(Klant klant)
+        {
+            if (Klanten != null)
+            {
+                foreach (Klant k in klanten)
+                {
+                    if (k.Email == klant.Email)
+                    {
+                        return klant ;
+                    }
+                }
+            }
+            return null;
+        }
+        public bool AddKlant(Klant klant)
+        {
+            foreach (Klant k in klanten)
+            {
+                if (FindKlant(klant.Email) != null)
+                {
+                    return false;
+                }
+                data.InsertKlant(klant);
+                RefreshData();
+                return true;
+            }
+            return false;
+        }
+
+
+
+        public Klant FindKlant(string email)
+        {
+            if (Klanten != null)
+            {
+                foreach (Klant k in klanten)
+                {
+                    if (k.Email == email)
+                    {
+                        return k;
+                    }
+                }
+            }
+            return null;
+        }
+
+        public bool AddProductToWinkelwagen(Product product, Klant klant, int aantal)
+        {
+           data.InsertCart(product, klant, aantal);
+            {
+                return true;
+            }
         }
 
         public string GetDataBaseString()

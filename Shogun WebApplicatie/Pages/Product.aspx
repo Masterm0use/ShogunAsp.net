@@ -4,9 +4,10 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Body" runat="server">
     <form runat="server">
-       <div class="conatainer">
-         <table>
-        <tr>
+       <div class="container">
+    <div class="row">
+        <div class="col-md-5">
+         <table><tr>
             <td rowspan="4" style="width: 400px">
                 <asp:Image ID="imgProduct" runat="server" CssClass="detailsImage" />
             </td>
@@ -34,12 +35,14 @@
                 <br />
                 <asp:Label ID="lblItemNr" runat="server" Style="font-style: italic"></asp:Label>
             </td>
-        </tr>
-        <tr>
-            <td class="auto-style2">&nbsp;<asp:Label ID="lblAvailable" runat="server" CssClass="productPrice">Available!</asp:Label>
-            </td>
-        </tr>
-    </table>
+                </tr>
+                  <tr>
+                    <td class="auto-style2">&nbsp;<asp:Label ID="lblAvailable" runat="server" CssClass="productPrice">Available!</asp:Label>
+                  </td>
+                </tr>
+                </table>
+            </div>
+         </div>
        </div>
     </form>
 </asp:Content>

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Shogun_WebApplicatie.Csharp;
+using Shogun_WebApplicatie.Pages.UserControls;
 
 namespace Shogun_WebApplicatie
 {
@@ -15,6 +16,23 @@ namespace Shogun_WebApplicatie
         protected void Page_Load(object sender, EventArgs e)
         {
             admin = new Administratie();
+            LaadProducten();
+            VulProducten();
+
+        }
+
+        private void LaadProducten()
+        {
+            foreach (Categorie c in admin.Categories)
+            {
+                ProductCategorie productCategorie = (ProductCategorie)LoadControl("UserControls/ProductCategorie.ascx");
+                productCategorie.Categorie = c;
+                categorieLink.Controls.Add(productCategorie);
+            }
+        }
+
+        public void VulProducten()
+        {
             List<Product> products = admin.Products;
 
             if (products != null)
@@ -54,6 +72,10 @@ namespace Shogun_WebApplicatie
         }
     }
 }
+    
+
+
+
 
         
     

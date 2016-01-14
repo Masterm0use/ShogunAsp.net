@@ -136,10 +136,10 @@
     <Content Include="js\offcanvas.js" />
     <Content Include="packages.config" />
     <Content Include="Master.Master" />
-    <Content Include="Pages\Category.ascx" />
     <Content Include="Pages\Index.aspx" />
     <Content Include="Pages\Inlog.aspx" />
     <Content Include="Pages\NieuwAccount.aspx" />
+    <Content Include="Pages\UserControls\ProductCategorie.ascx" />
     <Content Include="Register.aspx" />
     <Content Include="Pages\Managment\ManagmentProduct.aspx" />
     <Content Include="Pages\Product.aspx" />
@@ -172,12 +172,12 @@
     <Compile Include="Database\Database.cs" />
     <Compile Include="Database\Find.cs" />
     <Compile Include="Database\Inserts.cs" />
-    <Compile Include="Pages\Category.ascx.cs">
-      <DependentUpon>Category.ascx</DependentUpon>
+    <Compile Include="Pages\UserControls\ProductCategorie.ascx.cs">
+      <DependentUpon>ProductCategorie.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\Category.ascx.designer.cs">
-      <DependentUpon>Category.ascx</DependentUpon>
+    <Compile Include="Pages\UserControls\ProductCategorie.ascx.designer.cs">
+      <DependentUpon>ProductCategorie.ascx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Master.Master.cs">

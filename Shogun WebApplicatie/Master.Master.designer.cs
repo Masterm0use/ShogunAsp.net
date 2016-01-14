@@ -22,6 +22,15 @@ namespace Shogun_WebApplicatie {
         protected global::System.Web.UI.WebControls.ContentPlaceHolder CSS;
         
         /// <summary>
+        /// btnLogin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink btnLogin;
+        
+        /// <summary>
         /// Body control.
         /// </summary>
         /// <remarks>

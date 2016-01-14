@@ -11,7 +11,17 @@ namespace Shogun_WebApplicatie
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["EmailAccout"] != null)
+            {
+                btnLogin.Text = "Logout";
+                btnLogin.NavigateUrl = "/Pages/Inlog.aspx?logout";
 
+                if (Request.Url.ToString().EndsWith("?logout"))
+                {
+                    Session.RemoveAll();
+                    Response.Redirect("/Pages/Inlog.aspx");
+                }
+            }
         }
     }
 }

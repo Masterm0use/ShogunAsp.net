@@ -63,5 +63,41 @@ namespace Shogun_WebApplicatie.database
                 }
             }
         }
+
+        public void InsertCart(Product p, Klant k, int aantal)
+        {
+            
+            using (OracleConnection connection = Connection)
+            {
+                string Insert = "INSERT INTO BESTELLINGPRODUCT (BestellingID, ProductID, AccontID, Aantal) VALUES (seq_bestelling_ID.nextval, :PRODUCTID, :ACCOUNTID, :AANTAL)";
+                using (OracleCommand command = new OracleCommand(Insert, connection))
+                {
+                    command.Parameters.Add(new OracleParameter("PRODUCTID", p.ID ));
+                    command.Parameters.Add(new OracleParameter("ACCOUNTID", k.ID));
+                    command.Parameters.Add(new OracleParameter("AANTAL", aantal));
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void InsertKlant(Klant klant)
+        {
+
+            using (OracleConnection connection = Connection)
+            {
+                string Insert = "INSERT INTO ACCOUNT (ID, Emailadres, Wachtwoord, Voornaam, Achternaam, Geboortedatum, Bedrijf, BtwNummer, Telefoonnummer) VALUES(seq_Account_ID.nextval,':EMAIL', ':WACHTWOORD', ':VOORNAAM',':ACHTERNAAM',':GEBOORTEDATUM', ':BTWNUMMER', ':TELEFOONNUMMER');";
+                using (OracleCommand command = new OracleCommand(Insert, connection))
+                {
+                    command.Parameters.Add(new OracleParameter("EMAIL", klant.Email));
+                    command.Parameters.Add(new OracleParameter("WACHTWOORD", klant.Wachtwoord));
+                    command.Parameters.Add(new OracleParameter("VOORNAAM", klant.Voornaam ));
+                    command.Parameters.Add(new OracleParameter("ACHTERNAAM", klant.Achternaam ));
+                    command.Parameters.Add(new OracleParameter("GEBOORTEDATUM",klant.Geboortedatum));
+                    command.Parameters.Add(new OracleParameter("BTWNUMMER", 0));
+                    command.Parameters.Add(new OracleParameter("TELEFOONNUMMER", 1));
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }

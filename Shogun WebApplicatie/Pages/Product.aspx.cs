@@ -41,7 +41,26 @@ namespace Shogun_WebApplicatie
 
         protected void btnAdd_OnClick(object sender, EventArgs e)
         {
-            throw new NotImplementedException(); //TODO mochtnaar de winkelwagen.
+            if (!string.IsNullOrWhiteSpace(Request.QueryString["id"]))
+            {
+                string mySession = (string) Session["EmailAccout"];
+                if (mySession != null)
+                {
+                    string id = (Request.QueryString["id"]);
+                    int amount = Convert.ToInt32(ddlAmount.SelectedValue);
+                    bool Gelukt = admin.AddProductToWinkelwagen(admin.FindProduct(id), admin.FindKlant(mySession), amount);
+
+                    if (!Gelukt)
+                    {
+                        lblResult.Text = "Product bestaat al in uw winkelwagen.";
+                    }
+
+                }
+                else
+                {
+                    lblResult.Text = "Please log in to order items";
+                }
+            }
         }
     }
 }

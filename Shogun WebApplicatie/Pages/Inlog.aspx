@@ -4,6 +4,12 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Body" runat="server">
      <form class="form-signin" runat="server">
-         <asp:Login ID="Login1" runat="server" OnAuthenticate="Login1_Authenticate1"></asp:Login>
+        <h2 class="form-signin-heading">Log In</h2>
+        <label for="inputEmail" class="sr-only">Username</label>
+        <asp:TextBox ID="tbxInputUsername" runat="server" CssClass="form-control" placeholder ="Username" required="" autofocus="true"></asp:TextBox>
+       <label for="inputPassword" class="sr-only">Password</label>
+        <asp:TextBox ID="tbxInputPassword" runat="server" CssClass="form-control" placeholder ="Password" required="" autofocus="" TextMode="password"></asp:TextBox>
+        <asp:Button ID="btnInloggen" runat="server" Text="Log In" CssClass="btn btn-lg btn-primary btn-block" type="submit" OnClick="btnInloggen_Click"/>
+        <asp:Label ID="errorLabel" runat="server"></asp:Label>
      </form>
 </asp:Content>

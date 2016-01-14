@@ -36,93 +36,105 @@ namespace Shogun_WebApplicatie
             litVat.Text = "€" + vat;
             litTotalAmount.Text = "€" + totalAmount;
         }
+
         private void CreateShopTable(IEnumerable<Winkelwagen> winkelwagens, out double subTotal)
         {
             subTotal = new double();
 
+
             foreach (Winkelwagen winkelwagen in winkelwagens)
             {
+                Dictionary<Product, int> productenlist = new Dictionary<Product, int>();
+                productenlist = winkelwagen.AmountProduct;
+
                 //Het maken van de html en alle producten daar aantoevoegen die in de cart zitten
-                Product product = admin.FindProduct("MP-651K");
-
-                ImageButton btnImage = new ImageButton
+                foreach (KeyValuePair<Product, int> product in productenlist)
                 {
-                    ImageUrl = string.Format("~/Images/Producten/{0}", product.ImgUrl),
-                    PostBackUrl = string.Format("~/Pages/Product.aspx?id={0}", product.ID)
-                };
+                    Product p = product.Key;
+                    p.Aantal = product.Value;
+                    ImageButton btnImage = new ImageButton
+                    {
+                        ImageUrl = string.Format("~/Images/Producten/{0}", p.ImgUrl),
+                        PostBackUrl = string.Format("~/Pages/Product.aspx?id={0}", p.ID)
+                    };
 
-                LinkButton lnkDelete = new LinkButton
-                {
-                    PostBackUrl = string.Format("~/Pages/ShoppingCart.aspx?productId={0}", product.ID),
-                    Text = "Delete Item",
-                    ID = "del" + product.ID,
-                };
+                    LinkButton lnkDelete = new LinkButton
+                    {
+                        PostBackUrl = string.Format("~/Pages/ShoppingCart.aspx?productId={0}", p.ID),
+                        Text = "Delete Item",
+                        ID = "del" + p.ID,
+                    };
 
-                lnkDelete.Click += Delete_Item;
-
-                
-                int[] amount = Enumerable.Range(1, 20).ToArray();
-                DropDownList ddlAmount = new DropDownList
-                {
-                    DataSource = amount,
-                    AppendDataBoundItems = true,
-                    AutoPostBack = true,
-                    ID = product.ID.ToString()
-                };
-                ddlAmount.DataBind();
-                ddlAmount.SelectedValue = product.Aantal.ToString();
-                ddlAmount.SelectedIndexChanged += ddlAmount_SelectedIndexChanged;
-
-                //Table maken en vervolgens vullen
-                Table table = new Table { CssClass = "CartTable" };
-                TableRow row1 = new TableRow();
-                TableRow row2 = new TableRow();
-
-                TableCell cell1_1 = new TableCell { RowSpan = 2, Width = 50 };
-                TableCell cell1_2 = new TableCell
-                {
-                    Text = string.Format("<h4>{0}</h4><br />{1}<br/>In Stock",
-                    product.Naam, "Product nummer:" + product.ID),
-                    HorizontalAlign = HorizontalAlign.Left,
-                    Width = 350,
-                };
-                TableCell cell1_3 = new TableCell { Text = "Price per<hr/>" };
-                TableCell cell1_4 = new TableCell { Text = "Aantal<hr/>" };
-                TableCell cell1_5 = new TableCell { Text = "Totaal:<hr/>" };
-                TableCell cell1_6 = new TableCell();
-
-                TableCell cell2_1 = new TableCell();
-                TableCell cell2_2 = new TableCell { Text = "€" + product.PrijsStuk };
-                TableCell cell2_3 = new TableCell();
-                TableCell cell2_4 = new TableCell { Text = "€" + Math.Round(((Convert.ToDecimal(winkelwagen.AmountProduct.Values) * product.PrijsStuk)), 2) };
-                TableCell cell2_5 = new TableCell();
+                    lnkDelete.Click += Delete_Item;
 
 
+                    int[] amount = Enumerable.Range(1, 20).ToArray();
+                    DropDownList ddlAmount = new DropDownList
+                    {
+                        DataSource = amount,
+                        AppendDataBoundItems = true,
+                        AutoPostBack = true,
+                        ID = p.ID.ToString()
+                    };
+                    ddlAmount.DataBind();
+                    ddlAmount.SelectedValue = p.Aantal.ToString();
+                    ddlAmount.SelectedIndexChanged += ddlAmount_SelectedIndexChanged;
 
-                //De buttons vullen
-                cell1_1.Controls.Add(btnImage);
-                cell1_6.Controls.Add(lnkDelete);
-                cell2_3.Controls.Add(ddlAmount);
+                    //Table maken en vervolgens vullen
+                    Table table = new Table {CssClass = "CartTable"};
+                    TableRow row1 = new TableRow();
+                    TableRow row2 = new TableRow();
 
-                //De rows en cells adde
-                row1.Cells.Add(cell1_1);
-                row1.Cells.Add(cell1_2);
-                row1.Cells.Add(cell1_3);
-                row1.Cells.Add(cell1_4);
-                row1.Cells.Add(cell1_5);
-                row1.Cells.Add(cell1_6);
+                    TableCell cell1_1 = new TableCell {RowSpan = 2, Width = 50};
+                    TableCell cell1_2 = new TableCell
+                    {
+                        Text = string.Format("<h4>{0}</h4><br />{1}<br/>In Stock",
+                            p.Naam, "Product nummer:" + p.ID),
+                        HorizontalAlign = HorizontalAlign.Left,
+                        Width = 350,
+                    };
+                    TableCell cell1_3 = new TableCell {Text = "Price per<hr/>"};
+                    TableCell cell1_4 = new TableCell {Text = "Aantal<hr/>"};
+                    TableCell cell1_5 = new TableCell {Text = "Totaal:<hr/>"};
+                    TableCell cell1_6 = new TableCell();
 
-                row2.Cells.Add(cell2_1);
-                row2.Cells.Add(cell2_2);
-                row2.Cells.Add(cell2_3);
-                row2.Cells.Add(cell2_4);
-                row2.Cells.Add(cell2_5);
-                table.Rows.Add(row1);
-                table.Rows.Add(row2);
-                pnlShoppingCart.Controls.Add(table);
+                    TableCell cell2_1 = new TableCell();
+                    TableCell cell2_2 = new TableCell {Text = "€" + p.PrijsStuk};
+                    TableCell cell2_3 = new TableCell();
+                    TableCell cell2_4 = new TableCell
+                    {
+                        Text = "€" + Math.Round(((Convert.ToDecimal(1)*p.PrijsStuk)), 2)
+                    };
+                        // product aantal aapassen
+                    TableCell cell2_5 = new TableCell();
 
-                //TODO: vul totaalprice in..
-                
+
+
+                    //De buttons vullen
+                    cell1_1.Controls.Add(btnImage);
+                    cell1_6.Controls.Add(lnkDelete);
+                    cell2_3.Controls.Add(ddlAmount);
+
+                    //De rows en cells adde
+                    row1.Cells.Add(cell1_1);
+                    row1.Cells.Add(cell1_2);
+                    row1.Cells.Add(cell1_3);
+                    row1.Cells.Add(cell1_4);
+                    row1.Cells.Add(cell1_5);
+                    row1.Cells.Add(cell1_6);
+
+                    row2.Cells.Add(cell2_1);
+                    row2.Cells.Add(cell2_2);
+                    row2.Cells.Add(cell2_3);
+                    row2.Cells.Add(cell2_4);
+                    row2.Cells.Add(cell2_5);
+                    table.Rows.Add(row1);
+                    table.Rows.Add(row2);
+                    pnlShoppingCart.Controls.Add(table);
+
+                    //TODO: vul totaalprice in..
+
+                }
             }
         }
 
