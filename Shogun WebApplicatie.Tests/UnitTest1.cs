@@ -13,8 +13,10 @@ namespace Shogun_WebApplicatie.Tests
             DateTime testDatumBirth1 = new DateTime(2001, 1, 1);
             DateTime testDatumBirth2 = new DateTime();
 
-            Klant k = new Klant(1, "123@test.nl", "TestWW", "Test", "Test", testDatumBirth1, "TestDatum", "BTW123456", "0613556430", true, true);
-            Klant k1 = new Klant(1, "123@test.nl", "TestWW", "Test", "Test", testDatumBirth2, "TestDatum", "BTW123456", "0613556430", true, true);
+            Klant k = new Klant(1, "123@test.nl", "TestWW", "Test", "Test", testDatumBirth1, "TestDatum", "BTW123456",
+                "0613556430", true, true);
+            Klant k1 = new Klant(1, "123@test.nl", "TestWW", "Test", "Test", testDatumBirth2, "TestDatum", "BTW123456",
+                "0613556430", true, true);
 
             //Klant Data testen
             Assert.AreEqual(k.Nieuwsbrief, true);
@@ -43,8 +45,12 @@ namespace Shogun_WebApplicatie.Tests
         {
             DateTime testDatumBirth1 = new DateTime(1994, 9, 4);
 
-            Medewerker m = new Medewerker(1, "Marioschi@kpnmail.nl", "TEST", "Mario", "Schipper", testDatumBirth1, "Klokuus", "", "0612366666", true);
-            Medewerker m1 = new Medewerker(2, "testschi@kpnmail.nl", "TEST", "Mario", "Schipper", testDatumBirth1, "Klokuus", "", "0612366666", false);
+            Medewerker m = new Medewerker(1, "Marioschi@kpnmail.nl", "TEST", "Mario", "Schipper", testDatumBirth1,
+                "Klokuus", "", "0612366666", true);
+            Medewerker m1 = new Medewerker(2, "testschi@kpnmail.nl", "TEST", "Mario", "Schipper", testDatumBirth1,
+                "Klokuus", "", "0612366666", false);
+            Klant k = new Klant(1, "123@test.nl", "TestWW", "Test", "Test", testDatumBirth1, "TestDatum", "BTW123456",
+                "0613556430", true, true);
 
             Assert.AreEqual(m.BewerkRechten, true);
             m.BewerkRechten = false;

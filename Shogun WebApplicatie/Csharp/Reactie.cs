@@ -5,8 +5,30 @@ using System.Web;
 
 namespace Shogun_WebApplicatie.Csharp
 {
-    public class Reactie
+    public abstract class Reactie
     {
-        //Maken als er nog tijd over is (could)
+        private int reactieID;
+        private Klant schijverKlant;
+        private string reactieuit;
+        private DateTime datepost;
+
+        public int ReactieID { get { return reactieID; } }
+        public Klant SchijverKlant { get { return schijverKlant; } }
+        public string Reactieuit { get { return reactieuit; } }
+        public DateTime Datepost { get { return datepost; } }
+
+        public Reactie(int reactieID, Klant schijverKlant, string reactieuit, DateTime datepost)
+        {
+            this.reactieID = reactieID;
+            this.schijverKlant = schijverKlant;
+            this.reactieuit = reactieuit;
+            this.datepost = datepost;
+        }
+
+        public override string ToString()
+        {
+            string returnReactie = schijverKlant + ": " + reactieuit;
+            return returnReactie;
+        }
     }
 }

@@ -19,5 +19,7 @@ namespace Shogun_WebApplicatie.Csharp
             AmountProduct = amountProduct;
         }
 
+
+
     }
 }

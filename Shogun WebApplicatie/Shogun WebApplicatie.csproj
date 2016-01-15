@@ -161,6 +161,7 @@
     <Compile Include="Csharp\Account.cs" />
     <Compile Include="Csharp\Administratie.cs" />
     <Compile Include="Csharp\Blog.cs" />
+    <Compile Include="Csharp\BlogReactie.cs" />
     <Compile Include="Csharp\Categorie.cs" />
     <Compile Include="Csharp\Klant.cs" />
     <Compile Include="Csharp\Medewerker.cs" />

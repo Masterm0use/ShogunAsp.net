@@ -46,7 +46,6 @@ namespace Shogun_WebApplicatie.Csharp
         {
             //override tostring methode om gegevens gemakkelijk weer te geven
             //Dit was bedoeld om alle gegevens in een listbox te laten zien, 
-            //Zodat een medewerker makkelijk een account kon verwijderen.
 
             return (Convert.ToString((id) + " - " + Voornaam + " - " + Achternaam + " - " + Email));
         }
