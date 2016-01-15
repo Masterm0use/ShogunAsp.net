@@ -16,5 +16,19 @@ namespace Shogun_WebApplicatie.Csharp
         {
             this.BewerkRechten = bewerkRechten;
         }
+
+        public override string ToString()
+        {
+            string bewerkRechtentostring = "Rechten";
+            if (!BewerkRechten)
+            {
+                bewerkRechtentostring = "GeenRechten";
+                return Email + " - " + Voornaam + " - " + bewerkRechtentostring;
+            }
+            else
+            {
+                return Email + " - " + Voornaam + " - " + bewerkRechtentostring;
+            }
+        }
     }
 }

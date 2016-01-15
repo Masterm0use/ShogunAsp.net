@@ -45,9 +45,10 @@ namespace Shogun_WebApplicatie.Csharp
         public override string ToString()
         {
             //override tostring methode om gegevens gemakkelijk weer te geven
-            //wachtwoord staat niet in tostring methode (voor nu)    
+            //Dit was bedoeld om alle gegevens in een listbox te laten zien, 
+            //Zodat een medewerker makkelijk een account kon verwijderen.
 
-            return base.ToString();
+            return (Convert.ToString((id) + " - " + Voornaam + " - " + Achternaam + " - " + Email));
         }
     }
 }

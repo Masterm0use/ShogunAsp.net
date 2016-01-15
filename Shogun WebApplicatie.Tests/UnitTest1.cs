@@ -37,5 +37,22 @@ namespace Shogun_WebApplicatie.Tests
 
             Assert.AreEqual(c.ToString(), "Airsoft");
         }
+
+        [TestMethod]
+        public void TestClassMedewerker()
+        {
+            DateTime testDatumBirth1 = new DateTime(1994, 9, 4);
+
+            Medewerker m = new Medewerker(1, "Marioschi@kpnmail.nl", "TEST", "Mario", "Schipper", testDatumBirth1, "Klokuus", "", "0612366666", true);
+            Medewerker m1 = new Medewerker(2, "testschi@kpnmail.nl", "TEST", "Mario", "Schipper", testDatumBirth1, "Klokuus", "", "0612366666", false);
+
+            Assert.AreEqual(m.BewerkRechten, true);
+            m.BewerkRechten = false;
+            Assert.AreEqual(m.BewerkRechten, false);
+            Assert.AreEqual(m.Email, "Marioschi@kpnmail.nl");
+
+            Assert.AreEqual(m.ToString(), "Marioschi@kpnmail.nl - Mario - GeenRechten");
+            Assert.AreEqual(m1.ToString(), "testschi@kpnmail.nl - Mario - GeenRechten");
+        }
     }
 }
