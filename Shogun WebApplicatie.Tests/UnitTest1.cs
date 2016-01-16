@@ -60,5 +60,34 @@ namespace Shogun_WebApplicatie.Tests
             Assert.AreEqual(m.ToString(), "Marioschi@kpnmail.nl - Mario - GeenRechten");
             Assert.AreEqual(m1.ToString(), "testschi@kpnmail.nl - Mario - GeenRechten");
         }
+
+        [TestMethod]
+
+        public void TestClassBlog()
+        {
+            DateTime testDatumBirth1 = new DateTime(1994, 9, 4);
+            DateTime testGeplaatst = new DateTime(2016, 1, 16);
+
+            Medewerker m = new Medewerker(1, "Marioschi@kpnmail.nl", "TEST", "Mario", "Schipper", testDatumBirth1,
+                "Klokuus", "", "0612366666", true);
+            Klant k = new Klant(1, "123@test.nl", "TestWW", "Test", "Test", testDatumBirth1, "TestDatum", "BTW123456",
+                "0613556430", true, true);
+            Blog b = new Blog(1, m, "Gratis airsoft geweren.", "Bij een aankoop van 10 eu gratis guns!", testDatumBirth1);
+            Reactie r = new BlogReactie(1, k, "Mooie actie!", testGeplaatst, 1);
+
+            //Testen van classe blog:
+            b.AddComment(r);
+
+            Assert.AreEqual(b.ToString(), "Gratis airsoft geweren. door: Marioschi@kpnmail.nl - Mario - Rechten - Bij een aankoop van 10 eu gratis guns!");
+
+            // Assert.AreEqual(b,"" );
+            Assert.AreEqual(b.BlogID, 1);
+            Assert.AreEqual(b.DateUit, testDatumBirth1);
+            Assert.AreEqual(b.Schrijver.Voornaam, m.Voornaam);
+            Assert.AreEqual(b.Tekst, "Bij een aankoop van 10 eu gratis guns!");
+            Assert.AreEqual(b.Titel, "Gratis airsoft geweren.");
+
+
+        }
     }
 }
