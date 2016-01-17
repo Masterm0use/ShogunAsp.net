@@ -20,7 +20,7 @@ namespace Shogun_WebApplicatie.Csharp
             AmountProduct = amountProduct;
         }
 
-        public decimal CalTotaalPrijs()
+        private decimal CalTotaalPrijs()
         {
             decimal TotaalPrijs = 0;
             foreach (KeyValuePair<Product, int> product in AmountProduct)
