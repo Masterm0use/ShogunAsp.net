@@ -8,6 +8,7 @@ namespace Shogun_WebApplicatie.Tests
     [TestClass]
     public class UnitTest1
     {
+        //Het aanmaken van de testdata die ik zal gebruiken in de methodes.
         private DateTime testDatumBirth1;
         private DateTime testDatumBirth2;
         private DateTime testGeplaatst;
@@ -25,26 +26,30 @@ namespace Shogun_WebApplicatie.Tests
         [TestInitialize]
         public void Initialize()
         {
-
+            //Initialize van de test data.
+            //Aantal datums voor onderstaande testen waar nodig.
             testDatumBirth1 = new DateTime(2001, 1, 1);
             testDatumBirth2 = new DateTime();
             testGeplaatst = new DateTime(2016, 1, 16);
 
+            //Niewe categorie
             c = new Categorie(1, "Airsoft", 1);
 
+            //Niewe producten toevoegen.
             p = new Product("112342", c, "Geweer", "Ja", 10, 1, "mooi", "/Imageurl");
             p1 = new Product("112342", c, "Geweer", "Ja", 20, 1, "mooi", "/Imageurl");
 
+            //Niewe klanten toevoegen.
             k = new Klant(1, "123@test.nl", "TestWW", "Test", "Test", testDatumBirth1, "TestDatum", "BTW123456",
                 "0613556430", true, true);
             k1 = new Klant(1, "123@test.nl", "TestWW", "Test", "Test", testDatumBirth2, "TestDatum", "BTW123456",
                 "0613556430", true, true);
 
+            //Nieuwe medewerkers toevoegen.
             m = new Medewerker(1, "Marioschi@kpnmail.nl", "TEST", "Mario", "Schipper", testDatumBirth1,
                 "Klokuus", "", "0612366666", true);
             m1 = new Medewerker(2, "testschi@kpnmail.nl", "TEST", "Mario", "Schipper", testDatumBirth1,
                 "Klokuus", "", "0612366666", false);
-
         }
 
         [TestMethod]
@@ -72,6 +77,7 @@ namespace Shogun_WebApplicatie.Tests
         [TestMethod]
         public void TestClassMedewerker()
         {
+            
             Assert.AreEqual(m.BewerkRechten, true);
             m.BewerkRechten = false;
             Assert.AreEqual(m.BewerkRechten, false);
@@ -88,7 +94,7 @@ namespace Shogun_WebApplicatie.Tests
             Blog b = new Blog(1, m, "Gratis airsoft geweren.", "Bij een aankoop van 10 eu gratis guns!", testDatumBirth1);
             Reactie r = new BlogReactie(1, k, "Mooie actie!", testGeplaatst, 1);
 
-            //Testen van classe blog:
+            //Testen van classe blog en daarbij het toevoegen van de comment:
             b.AddComment(r);
             Assert.AreEqual(b.ToString(),
                 "Gratis airsoft geweren. door: Marioschi@kpnmail.nl - Mario - Rechten - Bij een aankoop van 10 eu gratis guns!");
@@ -134,6 +140,7 @@ namespace Shogun_WebApplicatie.Tests
         [TestMethod]
         public void TestClassProduct()
         {
+            //De getters testen van het product. En kijken of deze gelijk zijn.
             Assert.AreEqual(p.Beschikbaarheid, "Ja");
             Assert.AreEqual(p.Beschrijving, "mooi");
             Assert.AreEqual(p1.ID, "112342");
