@@ -16,29 +16,40 @@ namespace Shogun_WebApplicatie.Tests
         private Product p1;
 
         private Categorie c;
+        private Klant k;
+        private Klant k1;
+
+        private Medewerker m;
+        private Medewerker m1;
 
         [TestInitialize]
         public void Initialize()
         {
 
-            DateTime testDatumBirth1 = new DateTime(2001, 1, 1);
-            DateTime testDatumBirth2 = new DateTime();
-            DateTime testGeplaatst = new DateTime(2016, 1, 16);
+            testDatumBirth1 = new DateTime(2001, 1, 1);
+            testDatumBirth2 = new DateTime();
+            testGeplaatst = new DateTime(2016, 1, 16);
 
-            Product p = new Product("112342", c, "Geweer", "Ja", 10, 1, "mooi", "/Imageurl");
-            Product p1 = new Product("112342", c, "Geweer", "Ja", 20, 1, "mooi", "/Imageurl");
+            c = new Categorie(1, "Airsoft", 1);
 
-            Categorie c = new Categorie(1, "Airsoft", 1);
+            p = new Product("112342", c, "Geweer", "Ja", 10, 1, "mooi", "/Imageurl");
+            p1 = new Product("112342", c, "Geweer", "Ja", 20, 1, "mooi", "/Imageurl");
+
+            k = new Klant(1, "123@test.nl", "TestWW", "Test", "Test", testDatumBirth1, "TestDatum", "BTW123456",
+                "0613556430", true, true);
+            k1 = new Klant(1, "123@test.nl", "TestWW", "Test", "Test", testDatumBirth2, "TestDatum", "BTW123456",
+                "0613556430", true, true);
+
+            m = new Medewerker(1, "Marioschi@kpnmail.nl", "TEST", "Mario", "Schipper", testDatumBirth1,
+                "Klokuus", "", "0612366666", true);
+            m1 = new Medewerker(2, "testschi@kpnmail.nl", "TEST", "Mario", "Schipper", testDatumBirth1,
+                "Klokuus", "", "0612366666", false);
+
         }
 
         [TestMethod]
         public void TestClassKlant()
         {
-            Klant k = new Klant(1, "123@test.nl", "TestWW", "Test", "Test", testDatumBirth1, "TestDatum", "BTW123456",
-                "0613556430", true, true);
-            Klant k1 = new Klant(1, "123@test.nl", "TestWW", "Test", "Test", testDatumBirth2, "TestDatum", "BTW123456",
-                "0613556430", true, true);
-
             //Klant Data testen
             Assert.AreEqual(k.Nieuwsbrief, true);
             Assert.AreEqual(k.Abonnement, true);
@@ -61,13 +72,6 @@ namespace Shogun_WebApplicatie.Tests
         [TestMethod]
         public void TestClassMedewerker()
         {
-            Medewerker m = new Medewerker(1, "Marioschi@kpnmail.nl", "TEST", "Mario", "Schipper", testDatumBirth1,
-                "Klokuus", "", "0612366666", true);
-            Medewerker m1 = new Medewerker(2, "testschi@kpnmail.nl", "TEST", "Mario", "Schipper", testDatumBirth1,
-                "Klokuus", "", "0612366666", false);
-            Klant k = new Klant(1, "123@test.nl", "TestWW", "Test", "Test", testDatumBirth1, "TestDatum", "BTW123456",
-                "0613556430", true, true);
-
             Assert.AreEqual(m.BewerkRechten, true);
             m.BewerkRechten = false;
             Assert.AreEqual(m.BewerkRechten, false);
@@ -81,10 +85,6 @@ namespace Shogun_WebApplicatie.Tests
 
         public void TestClassBlog()
         {
-            Medewerker m = new Medewerker(1, "Marioschi@kpnmail.nl", "TEST", "Mario", "Schipper", testDatumBirth1,
-                "Klokuus", "", "0612366666", true);
-            Klant k = new Klant(1, "123@test.nl", "TestWW", "Test", "Test", testDatumBirth1, "TestDatum", "BTW123456",
-                "0613556430", true, true);
             Blog b = new Blog(1, m, "Gratis airsoft geweren.", "Bij een aankoop van 10 eu gratis guns!", testDatumBirth1);
             Reactie r = new BlogReactie(1, k, "Mooie actie!", testGeplaatst, 1);
 
@@ -106,31 +106,24 @@ namespace Shogun_WebApplicatie.Tests
             Assert.AreEqual(r.Datepost, testGeplaatst);
             Assert.AreEqual(r.SchijverKlant, k);
             Assert.AreEqual(r.ToString(), "Test: Mooie actie!");
-
         }
 
         [TestMethod]
         public void TestClassWinkelwagen()
         {
-            DateTime testDatumBirth1 = new DateTime(1994, 9, 4);
-            Klant k = new Klant(1, "123@test.nl", "TestWW", "Test", "Test", testDatumBirth1, "TestDatum", "BTW123456",
-                "0613556430", true, true);
-            Categorie c = new Categorie(1, "Airsoft", 1);
             Dictionary<Product, int> productenlist = new Dictionary<Product, int>();
-            
-
             productenlist.Add(p, 4);
             Winkelwagen w = new Winkelwagen(1, k, productenlist);
 
             //Nu gaan we de methode testen in de winkelwagen. Aangezien de prijs van het product 10eu kost 
             //en we hebben er 4 producten van hetzelfde product erin gedaan. Dus hier moet 40 uitkomen 4*10
-            decimal pricetotaal = w.TotaalPrijs();
+            decimal pricetotaal = w.TotaalPrijs;
             Assert.AreEqual(pricetotaal, 40);
 
             //Nu voegen we nog een product toe van 20 eu, dus nu moet de prijs uitkomen op 60 eu.
             productenlist.Add(p1, 1);
             pricetotaal = 0;
-            pricetotaal = w.TotaalPrijs();
+            pricetotaal = w.TotaalPrijs;
             Assert.AreEqual(pricetotaal, 60);
 
             //De overige get testen.
@@ -141,7 +134,12 @@ namespace Shogun_WebApplicatie.Tests
         [TestMethod]
         public void TestClassProduct()
         {
-            
+            Assert.AreEqual(p.Beschikbaarheid, "Ja");
+            Assert.AreEqual(p.Beschrijving, "mooi");
+            Assert.AreEqual(p1.ID, "112342");
+            Assert.AreEqual(p.ImgUrl,"/Imageurl");
+            Assert.AreEqual(p.Naam, "Geweer");
+            Assert.AreEqual(p.Categorie, c);
         }
     }
 }
