@@ -8,12 +8,32 @@ namespace Shogun_WebApplicatie.Tests
     [TestClass]
     public class UnitTest1
     {
+        private DateTime testDatumBirth1;
+        private DateTime testDatumBirth2;
+        private DateTime testGeplaatst;
+
+        private Product p;
+        private Product p1;
+
+        private Categorie c;
+
+        [TestInitialize]
+        public void Initialize()
+        {
+
+            DateTime testDatumBirth1 = new DateTime(2001, 1, 1);
+            DateTime testDatumBirth2 = new DateTime();
+            DateTime testGeplaatst = new DateTime(2016, 1, 16);
+
+            Product p = new Product("112342", c, "Geweer", "Ja", 10, 1, "mooi", "/Imageurl");
+            Product p1 = new Product("112342", c, "Geweer", "Ja", 20, 1, "mooi", "/Imageurl");
+
+            Categorie c = new Categorie(1, "Airsoft", 1);
+        }
+
         [TestMethod]
         public void TestClassKlant()
         {
-            DateTime testDatumBirth1 = new DateTime(2001, 1, 1);
-            DateTime testDatumBirth2 = new DateTime();
-
             Klant k = new Klant(1, "123@test.nl", "TestWW", "Test", "Test", testDatumBirth1, "TestDatum", "BTW123456",
                 "0613556430", true, true);
             Klant k1 = new Klant(1, "123@test.nl", "TestWW", "Test", "Test", testDatumBirth2, "TestDatum", "BTW123456",
@@ -31,9 +51,6 @@ namespace Shogun_WebApplicatie.Tests
         [TestMethod]
         public void TestClassCategorie()
         {
-            Categorie c = new Categorie(1, "Airsoft", 1);
-
-
             Assert.AreEqual(c.CategorieNaam, "Airsoft");
             Assert.AreEqual(c.ID, 1);
             Assert.AreEqual(c.Parentid, 1);
@@ -44,8 +61,6 @@ namespace Shogun_WebApplicatie.Tests
         [TestMethod]
         public void TestClassMedewerker()
         {
-            DateTime testDatumBirth1 = new DateTime(1994, 9, 4);
-
             Medewerker m = new Medewerker(1, "Marioschi@kpnmail.nl", "TEST", "Mario", "Schipper", testDatumBirth1,
                 "Klokuus", "", "0612366666", true);
             Medewerker m1 = new Medewerker(2, "testschi@kpnmail.nl", "TEST", "Mario", "Schipper", testDatumBirth1,
@@ -66,9 +81,6 @@ namespace Shogun_WebApplicatie.Tests
 
         public void TestClassBlog()
         {
-            DateTime testDatumBirth1 = new DateTime(1994, 9, 4);
-            DateTime testGeplaatst = new DateTime(2016, 1, 16);
-
             Medewerker m = new Medewerker(1, "Marioschi@kpnmail.nl", "TEST", "Mario", "Schipper", testDatumBirth1,
                 "Klokuus", "", "0612366666", true);
             Klant k = new Klant(1, "123@test.nl", "TestWW", "Test", "Test", testDatumBirth1, "TestDatum", "BTW123456",
@@ -105,8 +117,7 @@ namespace Shogun_WebApplicatie.Tests
                 "0613556430", true, true);
             Categorie c = new Categorie(1, "Airsoft", 1);
             Dictionary<Product, int> productenlist = new Dictionary<Product, int>();
-            Product p = new Product("112342", c, "Geweer", "Ja", 10, 1, "mooi", "/Imageurl");
-            Product p1 = new Product("112342", c, "Geweer", "Ja", 20, 1, "mooi", "/Imageurl");
+            
 
             productenlist.Add(p, 4);
             Winkelwagen w = new Winkelwagen(1, k, productenlist);
@@ -125,6 +136,12 @@ namespace Shogun_WebApplicatie.Tests
             //De overige get testen.
             Assert.AreEqual(w.ID, 1);
             Assert.AreEqual(w.Klant, k);
+        }
+
+        [TestMethod]
+        public void TestClassProduct()
+        {
+            
         }
     }
 }
