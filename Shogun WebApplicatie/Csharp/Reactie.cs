@@ -27,7 +27,7 @@ namespace Shogun_WebApplicatie.Csharp
 
         public override string ToString()
         {
-            string returnReactie = schijverKlant + ": " + reactieuit;
+            string returnReactie = schijverKlant.Voornaam + ": " + reactieuit;
             return returnReactie;
         }
     }

@@ -7,6 +7,7 @@ namespace Shogun_WebApplicatie.Csharp
 {
     public class Winkelwagen
     {
+        private decimal totalprice;
         public int ID { get; set; }
         public Klant Klant { get; set; }
         public Dictionary<Product , int> AmountProduct  { get; set; }
@@ -19,7 +20,18 @@ namespace Shogun_WebApplicatie.Csharp
             AmountProduct = amountProduct;
         }
 
+        public decimal TotaalPrijs()
+        {
+            totalprice = 0;
+            foreach (KeyValuePair<Product, int> product in AmountProduct)
+            {
+                Product p = product.Key;
+                p.Aantal = product.Value;
 
-
+                decimal buffer = p.Aantal*p.PrijsStuk;
+                totalprice += buffer;
+            }
+            return totalprice;
+        }
     }
 }

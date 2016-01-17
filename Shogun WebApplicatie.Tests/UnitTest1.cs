@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Shogun_WebApplicatie.Csharp;
 
@@ -77,17 +78,53 @@ namespace Shogun_WebApplicatie.Tests
 
             //Testen van classe blog:
             b.AddComment(r);
+            Assert.AreEqual(b.ToString(),
+                "Gratis airsoft geweren. door: Marioschi@kpnmail.nl - Mario - Rechten - Bij een aankoop van 10 eu gratis guns!");
 
-            Assert.AreEqual(b.ToString(), "Gratis airsoft geweren. door: Marioschi@kpnmail.nl - Mario - Rechten - Bij een aankoop van 10 eu gratis guns!");
-
-            // Assert.AreEqual(b,"" );
             Assert.AreEqual(b.BlogID, 1);
+            Assert.AreEqual(b.BlogID, r.ReactieID);
             Assert.AreEqual(b.DateUit, testDatumBirth1);
             Assert.AreEqual(b.Schrijver.Voornaam, m.Voornaam);
             Assert.AreEqual(b.Tekst, "Bij een aankoop van 10 eu gratis guns!");
             Assert.AreEqual(b.Titel, "Gratis airsoft geweren.");
 
+            //Testen van de classe reactie
+            Assert.AreEqual(r.ReactieID, 1);
+            Assert.AreEqual(r.Reactieuit, "Mooie actie!");
+            Assert.AreEqual(r.Datepost, testGeplaatst);
+            Assert.AreEqual(r.SchijverKlant, k);
+            Assert.AreEqual(r.ToString(), "Test: Mooie actie!");
 
+        }
+
+        [TestMethod]
+        public void TestClassWinkelwagen()
+        {
+            DateTime testDatumBirth1 = new DateTime(1994, 9, 4);
+            Klant k = new Klant(1, "123@test.nl", "TestWW", "Test", "Test", testDatumBirth1, "TestDatum", "BTW123456",
+                "0613556430", true, true);
+            Categorie c = new Categorie(1, "Airsoft", 1);
+            Dictionary<Product, int> productenlist = new Dictionary<Product, int>();
+            Product p = new Product("112342", c, "Geweer", "Ja", 10, 1, "mooi", "/Imageurl");
+            Product p1 = new Product("112342", c, "Geweer", "Ja", 20, 1, "mooi", "/Imageurl");
+
+            productenlist.Add(p, 4);
+            Winkelwagen w = new Winkelwagen(1, k, productenlist);
+
+            //Nu gaan we de methode testen in de winkelwagen. Aangezien de prijs van het product 10eu kost 
+            //en we hebben er 4 producten van hetzelfde product erin gedaan. Dus hier moet 40 uitkomen 4*10
+            decimal pricetotaal = w.TotaalPrijs();
+            Assert.AreEqual(pricetotaal, 40);
+
+            //Nu voegen we nog een product toe van 20 eu, dus nu moet de prijs uitkomen op 60 eu.
+            productenlist.Add(p1, 1);
+            pricetotaal = 0;
+            pricetotaal = w.TotaalPrijs();
+            Assert.AreEqual(pricetotaal, 60);
+
+            //De overige get testen.
+            Assert.AreEqual(w.ID, 1);
+            Assert.AreEqual(w.Klant, k);
         }
     }
 }
